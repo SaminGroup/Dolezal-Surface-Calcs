@@ -1,0 +1,19 @@
+general:
+  ISTART = 0
+  ICHARG = 2
+  SYSTEM = (110) surface
+  ENCUT = 600
+  ISMEAR = 2 ; SIGMA = 0.1
+  ALGO = Fast
+  EDIFF = 1E-04
+  EDIFFG = -1E-02
+  NSW = 0
+  POTIM = 0.1
+  IBRION = -1
+  LVHAR = .TRUE.
+  NCORE = 24
+  LREAL = Auto
+  LCHARG = .FALSE.
+  LWAVE = .FALSE.
+  
+  
