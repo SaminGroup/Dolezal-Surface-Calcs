@@ -29,7 +29,7 @@ order.
 8. work-function : this holds the VASP INCAR and KPOINTS I used to calculate the work function for the different coverages, each of which has its own directory which holds the
                    data files for that coverage. The locpot.py script I used was found at https://gist.github.com/Ionizing/1ac92f98e8b00a1cf6f16bd57694ff03 and did all the heavy
                    lifting. Because it was only a few numbers I did each coverage one-by-one and added them to the file workfuncs.txt by hand as I went. plot-work.py plots the 
-                   work function versus coverage. Unfortunately
+                   work function versus coverage. Unfortunately, the LOCPOT files are very large and I was unable to upload these.
 
 POSCAR-MC2-B2-Bulk-Supercell.vasp is the structure I used to cut the (0 1 0), (0 1 1), and (1 1 1) surface slabs. I followed a tutorial on YouTube which demonstrates how to generate
 surfaces quickly with VESTA (https://www.youtube.com/watch?v=ywR5pWqbllE).
