@@ -1,0 +1,18 @@
+general:
+  ISTART = 0
+  ICHARG = 2
+  SYSTEM = (110) surface DM
+  ENCUT = 600
+  ISMEAR = 2 ; SIGMA = 0.1
+  ALGO = 48
+  EDIFF = 1E-06
+  MAXMIX = 60
+  NSW = 100
+  IBRION = 5
+  NFREE = 2
+  LREAL = Auto
+  POTIM = 0.015
+  LWAVE = .FALSE.
+  LCHARG = .FALSE.
+  
+  
