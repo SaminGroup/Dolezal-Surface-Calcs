@@ -1,5 +1,6 @@
 import ase.io.vasp
 import numpy as np
+import json
 import seaborn as sns
 import matplotlib.pyplot as plt
 
@@ -18,7 +19,7 @@ EO2 = -9.86094251 # from O2 in a box, units are eV
 correction = (-EO2 - 5.17)/2
 
 Temps = np.array([100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,
-              1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,2600])
+                  1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,2600])
 
 
 def calc_delta_mu(Temp,Po2):
@@ -41,7 +42,7 @@ def calc_delta_mu(Temp,Po2):
     rel_mu0 = (rel_mu0 / 96.485)/2
     rel_mu0 = [rel_mu0[i] for i in range(len(T)) if T[i] == Temp][0]
 
-    F = np.loadtxt("data/helmholtz-correction")
+    F = np.loadtxt("helmholtz-correction")
 
     F = [F[i,:] for i in range(len(T)) if T[i] == Temp][0]
 
@@ -50,7 +51,7 @@ def calc_delta_mu(Temp,Po2):
     return(delta_mu0,F)
 
 
-def thermo():
+def thermo(newrun):
 
     EsurfO = np.array([-504.67438899, -515.46606020, -526.18819664, -536.81111451,
                        -547.30111817, -557.85671767, -568.03170123, -577.92559529,
@@ -73,67 +74,93 @@ def thermo():
     num = np.linspace(0,2,Nsurf)
     Natoms = 64
     count = np.arange(1,31) + Natoms
-
     Po2 = np.arange(-30,5,1e-3)
 
-    minimum = np.zeros((len(Temps),len(Po2),2))
 
+    if newrun:
+        minimum = []
+        newpressure = []
+        for t in range(len(Temps)):
+            T = Temps[t]
+            kT = 0.025851*(T/300)
+            terms = np.array([0.10*np.log(0.10),0.15*np.log(0.15),0.05*np.log(0.05),
+                              0.30*np.log(0.30),0.40*np.log(0.40)])
+            TS = -kT*sum(terms)
+
+            delta_mu0,F = calc_delta_mu(T,Po2)
+
+            mu0 = 0.5*(EO2+correction)
+            Gibbs = np.zeros((len(Po2),Nsurf+1))
+            for i in range(len(Po2)):
+                Gibbs[i,1:] = ((EOsurf+F) - Esurf - (count-Natoms)*(mu0 + delta_mu0[i]) - TS) / count
+                Gibbs[i,0] = -TS/Natoms
+
+            i,j = np.where(Gibbs == np.min(Gibbs))[0][0],np.where(Gibbs == np.min(Gibbs))[1][0]
+
+            #minimum_coverage = np.zeros((len(Po2),2))
+            minimum_coverage = np.zeros((len(Po2),))
+            for k in range(Gibbs.shape[0]):
+                emin = min(Gibbs[k,:])
+                for j in range(Gibbs.shape[1]):
+                    if Gibbs[k,j] == emin:
+
+                        minimum_coverage[k] = j
+            # this next block of logic retains only the unique coverages and
+            # pressures to avoid plotting 35,000 bars overtop one another
+            CPo2 = Po2.copy()
+            minimum_coverage, indices = np.unique(minimum_coverage,return_index=True)
+            newP = np.zeros((len(indices)))
+            for p in range(len(indices)):
+                newP[p] = CPo2[indices[p]]
+
+            minimum.append(list(minimum_coverage))
+            newpressure.append(list(newP))
+
+            print("Finished scanning {} K".format(Temps[t]))
+        with open("coverage.txt","w") as f:
+            json.dump(minimum,f)
+
+        with open("pressure_widths.txt","w") as f:
+            json.dump(newpressure,f)
+
+
+    else:
+        with open("coverage.txt") as f:
+            minimum = json.load(f)
+
+        with open("pressure_widths.txt") as f:
+            newpressure = json.load(f)
+    # all coverages that make an appearance were first identified and the colors
+    # were chosen for each
+    c = []
     fig,ax = plt.subplots()
     for t in range(len(Temps)):
-
-        T = Temps[t]
-        kT = 0.025851*(T/300)
-        terms = np.array([0.10*np.log(0.10),0.15*np.log(0.15),0.05*np.log(0.05),
-                          0.30*np.log(0.30),0.40*np.log(0.40)])
-        TS = -kT*sum(terms)
-
-        delta_mu0,F = calc_delta_mu(T,Po2)
-
-        mu0 = 0.5*(EO2+correction)
-        Gibbs = np.zeros((len(Po2),Nsurf+1))
-        for i in range(len(Po2)):
-            Gibbs[i,1:] = ((EOsurf+F) - Esurf - (count-Natoms)*(mu0 + delta_mu0[i]) - TS) / count
-            Gibbs[i,0] = -TS/Natoms
-
-        i,j = np.where(Gibbs == np.min(Gibbs))[0][0],np.where(Gibbs == np.min(Gibbs))[1][0]
-
-        minimum_coverage = np.zeros((len(Po2),2))
-        for k in range(Gibbs.shape[0]):
-            emin = min(Gibbs[k,:])
-            for j in range(Gibbs.shape[1]):
-                if Gibbs[k,j] == emin:
-                    minimum_coverage[k] = [j,Po2[k]]
-        minimum[t,:] = minimum_coverage
-
-        for cov in range(0,minimum_coverage.shape[0]):
-            if int(minimum[t,cov,0]) == 30:
+        for p in range(len(newpressure[t])):
+            if minimum[t][p] == 30:
                 c = 'b'
-                #plt.barh(Temps[t],width = minimum[t,cov,1], color = c,height = 100,edgecolor="none")
-            elif int(minimum[t,cov,0]) == 29:
+            elif int(minimum[t][p]) == 29:
                 c = 'cornflowerblue'
-                #plt.barh(Temps[t],width = minimum[t,cov,1], color = c,height = 100,edgecolor="none")
-            elif int(minimum[t,cov,0]) == 27:
+            elif int(minimum[t][p]) == 27:
                 c = 'lightskyblue'
-                #plt.barh(Temps[t],width = minimum[t,cov,1], color = c,height = 100,edgecolor="none")
-            elif int(minimum[t,cov,0]) == 26:
+            elif int(minimum[t][p]) == 26:
                 c = 'slateblue'
-                #plt.barh(Temps[t],width = minimum[t,cov,1], color = c,height = 100,edgecolor="none")
-            elif int(minimum[t,cov,0]) == 21:
+            elif int(minimum[t][p]) == 21:
                 c = 'mediumpurple'
-            elif int(minimum[t,cov,0]) == 14:
+            elif int(minimum[t][p]) == 14:
                 c = 'lavender'
-                #plt.barh(Temps[t],width = minimum[t,cov,1], color = c,height = 100,edgecolor="none")
-            elif int(minimum[t,cov,0]) == 13:
+            elif int(minimum[t][p]) == 13:
                 c = 'seagreen'
-            elif int(minimum[t,cov,0]) == 7:
+            elif int(minimum[t][p]) == 7:
                 c = 'g'
-            elif int(minimum[t,cov,0]) == 0:
+            elif int(minimum[t][p]) == 0:
                 c = 'lightsteelblue'
-            elif int(minimum[t,cov,0]) == 4:
+            elif int(minimum[t][p]) == 4:
                 c = 'lightgreen'
-
-            plt.barh(Temps[t],width = minimum[t,cov,1], color = c,height = 100,edgecolor="none")
-        print(t+1)
+            plt.barh(Temps[t],width = newpressure[t][p], color = c,
+                     height = 100,edgecolor="none")
+            # fill in the remaining 2ML coverage on plot
+            plt.barh(Temps[t],width = 6, color = 'b',
+                     height = 100,edgecolor="none")
 
     plt.ylim(0,2650)
     plt.xlim(-30,5)
@@ -141,9 +168,7 @@ def thermo():
     plt.xlabel("$\\log_{10}(P_{O_2}/P^{o})$")
     plt.xticks([-30,-25,-20,-15,-10,-5,0,5])
     plt.yticks(np.arange(0,2800,200,dtype=int))
-    plt.savefig('stability-graph.png',dpi=300,bbox_inches='tight')
+    plt.ylim(Temps[0],Temps[-1])
+    plt.savefig('stability-graph.png',dpi=600,bbox_inches='tight')
 
-
-
-
-thermo()
+thermo(False)
