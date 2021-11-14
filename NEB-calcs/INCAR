@@ -1,0 +1,23 @@
+general:
+  ISTART = 0
+  ICHARG = 2
+  SYSTEM = (110) surface
+  ENCUT = 600
+  ISMEAR = 2 ; SIGMA = 0.1
+  ALGO = Fast
+  NSW = 0
+  POTIM = 0.1
+  IMAGES = 6
+  IBRION = 2
+  EDIFF = 1E-4
+  EDIFFG = -1E-02
+  NSW = 500
+  NELMIN = 5
+  NCORE = 24
+  LREAL = Auto
+  LCLIMB = .TRUE.
+  SPRING = -5
+  LWAVE = .FALSE.
+  LCHARG = .FALSE.
+  
+  
