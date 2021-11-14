@@ -16,9 +16,11 @@ order.
 4. Monolayer-Study : here are the INCAR and KPOINTS that were used to complete the monolayer study. INCAR-First was used to apply each O atom from 1 to 30. All Final structures
                      (30 POSCARs) were then re-run using INCAR-Final and KPOINTS1. The two python scripts are how I automated the systematic increase from 1/15 ML to 30/15 ML.
 
-5. NEB-calcs : these are the VASP files I used to perform the cNEB method on my four different sets. The four directories hold the data files for each set and the data analysis was
-               done by hand since it was quick. Please note that I used vtst to do the post-processing and image creation. The two commands I used were,
-               to generate 6 images from an intial (1) and final (2) structure "nebmake.pl POSCAR1 POSCAR2 6" and generate results "nebresults.pl"
+5. NEB-calcs : these are the VASP files I used to perform the cNEB calculations. The six directories hold the data files for each set plus the neighbor and full
+               coverage study on Set I. The data analysis and plotting was done using the two python scripts. reax_vs_energy.py plots the reaction pathway and a
+               bar plot; neb-calcs.py is where the MC simulation is performed over different temperature ranges. Please note that I used vtst to generate the images
+               and create the data files. The two commands I used were "nebmake.pl POSCAR1 POSCAR2 6" and "nebresults.pl" -- where the first takes and intial (1)
+               and final (2) position and creates 6 images, and the second generates the results once the VASP calculation is done
 
 6. PDOS : these are the VASP files I used to generate the DOS for the bulk structure I found from MC2. The python script plots the DOS as well as a histogram of the states in the
           s-, p-, and d-orbitals
