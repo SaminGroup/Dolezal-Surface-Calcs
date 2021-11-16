@@ -13,6 +13,8 @@ order.
                       files which reports the eigenvalues and eigenvectors. The python script scans all OUTCARs and outputs the vibrational Helmholtz free energy for each coverage
                       at each temperature. The Helmholtz matrix is saved to the "helmholtz-correction" file
 
+4. KMC : here you'll find two text files containing the average time per temperature and the counts of each event at each temperature. The python script kmc.py is              where the kmc simulation per temperature are executed and results are plotted. The input, sample, is either True or False depending on if you want to execute          the kmc loop for data generation (True) or read the data in from the text files (False)
+
 4. Monolayer-Study : here are the INCAR and KPOINTS that were used to complete the monolayer study. INCAR-First was used to apply each O atom from 1 to 30. All Final structures
                      (30 POSCARs) were then re-run using INCAR-Final and KPOINTS1. The two python scripts are how I automated the systematic increase from 1/15 ML to 30/15 ML.
 
