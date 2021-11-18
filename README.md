@@ -29,7 +29,7 @@ order.
 8. Thermodynamics : this is a purely post-processing step where I generated the stability plot for the different oxygen coverages. The python script calculates the Gibbs free
                     energy, scans over T and P, and plots the stability chart. This does depend on the helmholtz matrix which is an output from the dynamical.py script
 
-9. work-function : this holds the VASP INCAR and KPOINTS I used to calculate the work function for the different coverages, each of which has its own directory which holds the
+9. Work-Function : this holds the VASP INCAR and KPOINTS I used to calculate the work function for the different coverages, each of which has its own directory which holds the
                    data files for that coverage. The locpot.py script I used was found at https://gist.github.com/Ionizing/1ac92f98e8b00a1cf6f16bd57694ff03 and did all the heavy
                    lifting. Because it was only a few numbers I did each coverage one-by-one and added them to the file workfuncs.txt by hand as I went. plot-work.py plots the 
                    work function versus coverage. Unfortunately, the LOCPOT files are very large and I was unable to upload these.
