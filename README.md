@@ -35,4 +35,4 @@ order.
                    lifting. Because it was only a few numbers I did each coverage one-by-one and added them to the file workfuncs.txt by hand as I went. plot-work.py plots the 
                    work function versus coverage. Unfortunately, the LOCPOT files are very large and I was unable to upload these.
 
-POSCAR-MC2-B2-Bulk-Supercell.vasp is the structure I used to cut the (0 1 0), (0 1 1), and (1 1 1) surface slabs. If you want to learn a fast and easy way to prepare surface slabs with VESTA please check out the PDF file "easy-surface-prep-with-vesta.pdf".The python script add_vacuum.py is a quick way to easily add a vacuum of your surface slab
+POSCAR-MC2-B2-Bulk-Supercell.vasp is the structure I used to cut the (0 1 0), (0 1 1), and (1 1 1) surface slabs. If you want to learn a fast and easy way to prepare surface slabs with VESTA please check out the PDF file "easy-surface-prep-with-vesta.pdf". The python script add_vacuum.py is a quick way to easily add a vacuum of your surface slab
