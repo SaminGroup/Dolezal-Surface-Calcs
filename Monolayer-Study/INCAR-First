@@ -5,7 +5,7 @@ general:
   ENCUT = 600
   ISMEAR = 2 ; SIGMA = 0.1
   IALGO = 48
-  EDIFF = 1E-04
+  EDIFF = 1E-06
   EDIFFG = -1E-02
   NSW = 100
   NELMIN = 8
