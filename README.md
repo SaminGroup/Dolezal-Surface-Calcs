@@ -3,11 +3,11 @@
 Welcome! This directory provides the data files and post-processing scripts I developed for my surface calc paper. I have done my best to divide the scripts into an easy-to-follow
 order.
 
-1. Bader-Charge : this holds the data files to do charge transfer analysis. The data is in the bader-files directory and poscars/ holds the 30 different ML configurations in the 
-                  VASP POSCAR format
+1. Ads.En.&Distances : here is the script I used to report study the adsorption energy and the movement of the surface slabs versus different O atom coverages. The file "occupied-sites.txt" is the memory of which
+                   sites on the first and second layer were occupied and the order it all happened. I also looked into bond lengths which is in bond_length.py
 
-2. Ads.En.&Distances : here is the script I used to study the movement of the surface slabs versus different O atom coverages. The file "occupied-sites.txt" is the memory of which
-                   sites on the first and second layer were occupied and the order it all happened
+2. Bader-Charge : this holds the data files to do charge transfer analysis. The data is in the bader-files directory and poscars/ holds the 30 different ML configurations in the 
+                  VASP POSCAR format
 
 3. Dynamical-Matrix : this directory shares the INCAR and KPOINTS files I used to run the dynamical matrix calculations for the phonon eigenvalues. The data files are VASP OUTCAR
                       files which reports the eigenvalues and eigenvectors. The python script scans all OUTCARs and outputs the vibrational Helmholtz free energy for each coverage
