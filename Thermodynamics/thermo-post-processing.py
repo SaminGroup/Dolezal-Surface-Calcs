@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 sns.set_theme()
 sns.set_style('ticks')
-#plt.rc('font', family='serif')
+
 
 Nsurf = 30
 
@@ -16,7 +16,6 @@ Natoms = 64
 
 Esurf = -504.67438899
 EO2 = -9.86094251 # from O2 in a box, units are eV
-correction = (-EO2 - 5.17)/2
 
 Temps = np.array([100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,
                   1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,2600])
@@ -50,6 +49,27 @@ def calc_delta_mu(Temp,Po2):
 
     return(delta_mu0,F)
 
+# a dictionary for color coordinating the stability 17 colors
+colors = {
+30 : '#184e77', # dark blue
+29 : '#2d6a4f', # dark green
+28 : '#ffc8dd', # blue
+27 : '#669bbc', # pink block
+26 : '#95d5b2', # green
+21 : '#fdffb6', # yellow
+20 : '#52796f', # green small block
+19 : '#fb8b24', # orange small block
+14 : '#bbadff', # purple
+13 : '#a8dadc', # light blue
+12 : '#fee440', # yellow small block
+7  : '#8e9aaf', # gray
+5  : '#00f5d4', # bright teal sliver
+4  : '#6a4c93', # purple small block
+3  : '#8ac926', # green small block
+2  : '#ff595e', #pink-red small block
+1  : '#1982c4', # blue small block
+0  : '#ffffff'#'#e5e5e5'
+}
 
 def thermo(newrun):
 
@@ -89,7 +109,7 @@ def thermo(newrun):
 
             delta_mu0,F = calc_delta_mu(T,Po2)
 
-            mu0 = 0.5*(EO2+correction)
+            mu0 = 0.5*(EO2)
             Gibbs = np.zeros((len(Po2),Nsurf+1))
             for i in range(len(Po2)):
                 Gibbs[i,1:] = ((EOsurf+F) - Esurf - (count-Natoms)*(mu0 + delta_mu0[i]) - TS) / count
@@ -132,34 +152,14 @@ def thermo(newrun):
             newpressure = json.load(f)
     # all coverages that make an appearance were first identified and the colors
     # were chosen for each
-    c = []
     fig,ax = plt.subplots()
     for t in range(len(Temps)):
         for p in range(len(newpressure[t])):
-            if minimum[t][p] == 30:
-                c = 'b'
-            elif int(minimum[t][p]) == 29:
-                c = 'cornflowerblue'
-            elif int(minimum[t][p]) == 27:
-                c = 'lightskyblue'
-            elif int(minimum[t][p]) == 26:
-                c = 'slateblue'
-            elif int(minimum[t][p]) == 21:
-                c = 'mediumpurple'
-            elif int(minimum[t][p]) == 14:
-                c = 'lavender'
-            elif int(minimum[t][p]) == 13:
-                c = 'seagreen'
-            elif int(minimum[t][p]) == 7:
-                c = 'g'
-            elif int(minimum[t][p]) == 0:
-                c = 'lightsteelblue'
-            elif int(minimum[t][p]) == 4:
-                c = 'lightgreen'
+            c = colors[int(minimum[t][p])]
             plt.barh(Temps[t],width = newpressure[t][p], color = c,
                      height = 100,edgecolor="none")
             # fill in the remaining 2ML coverage on plot
-            plt.barh(Temps[t],width = 6, color = 'b',
+            plt.barh(Temps[t],width = 6, color = colors[30],
                      height = 100,edgecolor="none")
 
     plt.ylim(0,2650)
