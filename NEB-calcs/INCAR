@@ -9,7 +9,7 @@ general:
   POTIM = 0.1
   IMAGES = 6
   IBRION = 2
-  EDIFF = 1E-4
+  EDIFF = 1E-06
   EDIFFG = -1E-02
   NSW = 500
   NELMIN = 5
