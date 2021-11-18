@@ -16,7 +16,7 @@ order.
 4. KMC : here you'll find two text files containing the average time per temperature and the counts of each event at each temperature. The python script kmc.py is              where the kmc simulation per temperature are executed and results are plotted. The input, sample, is either True or False depending on if you want to execute          the kmc loop for data generation (True) or read the data in from the text files (False)
 
 5. Monolayer-Study : here are the INCAR and KPOINTS that were used to complete the monolayer study. INCAR-First was used to apply each O atom from 1 to 30. All Final structures
-                     (30 POSCARs) were then re-run using INCAR-Final and KPOINTS1. The two python scripts are how I automated the systematic increase from 1/15 ML to 30/15 ML. Note that all of the sites are listed in a dictionary. I loaded the clean slab surface into VESTA and found recorded each of the hollow sites in the dictionary.
+                     (30 POSCARs) were then re-run using INCAR-Final and KPOINTS1. The two python scripts are how I automated the systematic increase from 1/15 ML to 30/15 ML. Note that all of the sites are listed in a dictionary in monolayer_funcs.py. I loaded the clean slab surface into VESTA and recorded each of the hollow sites to the dictionary.
 
 6. NEB-calcs : these are the VASP files I used to perform the cNEB calculations. The six directories hold the data files for each set plus the neighbor and full
                coverage study on Set I. The data analysis and plotting was done using the two python scripts. reax-path.py plots the reaction pathway. Please note that I used vtst to generate the images
