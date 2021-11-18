@@ -19,8 +19,7 @@ order.
                      (30 POSCARs) were then re-run using INCAR-Final and KPOINTS1. The two python scripts are how I automated the systematic increase from 1/15 ML to 30/15 ML.
 
 6. NEB-calcs : these are the VASP files I used to perform the cNEB calculations. The six directories hold the data files for each set plus the neighbor and full
-               coverage study on Set I. The data analysis and plotting was done using the two python scripts. reax_vs_energy.py plots the reaction pathway and a
-               bar plot; neb-calcs.py is where the MC simulation is performed over different temperature ranges. Please note that I used vtst to generate the images
+               coverage study on Set I. The data analysis and plotting was done using the two python scripts. reax-path.py plots the reaction pathway. Please note that I used vtst to generate the images
                and create the data files. The two commands I used were "nebmake.pl POSCAR1 POSCAR2 6" and "nebresults.pl" -- where the first takes and intial (1)
                and final (2) position and creates 6 images, and the second generates the results once the VASP calculation is done
 
