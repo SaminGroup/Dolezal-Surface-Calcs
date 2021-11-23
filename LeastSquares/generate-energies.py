@@ -32,38 +32,33 @@ Esucc = (EOsurf1 - EsurfO - (1/2)*EO2)
 xax = np.arange(1,len(Esucc)+1)/15
 
 b = Esucc
-r = 22
+r = 22 # cutoff radius in Angstrom
 
 fig,ax = plt.subplots()
 
-
+# generate the A matrix
 A = build_Training_Amatrix(r)
+# perform least squares method
+x = np.linalg.lstsq(A,b,rcond=None)[0]
 
-#x = np.linalg.lstsq(A,b,rcond=None)[0]
 
-
-
-#np.savetxt('trained-ex.txt',x)
-x = np.loadtxt('trained-ex.txt')
+# save the optimal x vector
+np.savetxt('trained-ex.txt',x)
+#x = np.loadtxt('trained-ex.txt')
+# redefined for easy plotting
 x = A@x
 
-#x = np.linalg.lstsq(A,b,rcond=None)[0]
-#x = A@x
+# calculating relative error
 xerr = abs(np.linalg.norm(x) - np.linalg.norm(b))/np.linalg.norm(b)
 xerr *= 100
 
+# linear best fit for the parity plot
 m,yint = np.polyfit(b,x,1)
 
 sns.set_theme()
 sns.set_style('ticks')
 
-
-
-
-plt.plot(np.arange(len(x)),x,linewidth=0.75,c='k')
-plt.show()
-#plt.scatter(np.arange(len(x)),b , c = 'k')
-"""
+# create the parity plot and save
 plt.plot(Esucc,m*Esucc + yint,linewidth=0.75, c= 'r')
 plt.scatter(Esucc,x,marker='s',color='k',s=10)
 
@@ -75,4 +70,3 @@ plt.xlim(-6,-3.5)
 plt.ylim(-6,-3.75)
 sns.despine()
 plt.savefig("relative-error.png",dpi=400,bbox_inches='tight')
-"""
