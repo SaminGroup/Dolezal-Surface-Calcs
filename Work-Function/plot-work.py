@@ -15,14 +15,11 @@ for i in range(len(folders)):
         data = f.readlines()
         f.close()
 
-    #data = float([x for x in data if "E-fermi" in x][0].split()[2])
-
-    data = data[1:] # only include vacuum values
+    data = data[1:] # first line are labels, not values
     for j in range(len(data)):
         data[j] = float(data[j].split()[1])
 
     data_matrix[i] = np.max(data)
-    #data_matrix[i] = data
 
 print(data_matrix)
 
