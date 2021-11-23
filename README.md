@@ -9,7 +9,7 @@ order.
 
 3. Dynamical-Matrix : this directory shares the INCAR and KPOINTS files I used to run the dynamical matrix calculations for the phonon eigenvalues. The data files are VASP OUTCAR files which reports the eigenvalues and eigenvectors. The python script scans all OUTCARs and outputs the vibrational Helmholtz free energy for each coverage at each temperature. The Helmholtz matrix is saved to the "helmholtz-correction" file
 
-4. GrandCanonical : here is the scripts I used to execute the GCMC simulation on different surface slabs using the least-squares generated successive adsorption energy function. The python script "home_generate_stability_plot.py" will execute the gcmc for POSCAR1 - POSCAR4. The scripts gcmc.py and build_A.py hold functions. The gcmc is set to run for 5000 steps and the average oxygen coverage is recorded in a dataframe for the given (Temp,Pressure) values.
+4. GrandCanonical : here is the scripts I used to execute the GCMC simulation on different surface slabs using the least-squares generated successive adsorption energy function. The python script "generate_stability_plot.py" will execute the gcmc for POSCAR1 - POSCAR4. The scripts gcmc.py and build_A.py hold functions. The gcmc is set to run for 5000 steps and the average oxygen coverage is recorded in a dataframe for the given (Temp,Pressure) values.
 
 5. KMC : here you'll find two text files containing the average time per temperature and the counts of each event at each temperature. The python script kmc.py is where the kmc simulation per temperature are executed and results are plotted. The input, sample, is either True or False depending on if you want to execute the kmc loop for data generation (True) or read the data in from the text files (False)
 
