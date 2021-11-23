@@ -26,4 +26,5 @@ order.
 10. Work-Function : this holds the VASP INCAR and KPOINTS I used to calculate the work function for the different coverages, each of which has its own directory which holds the data files for that coverage. The locpot.py script I used was found at https://gist.github.com/Ionizing/1ac92f98e8b00a1cf6f16bd57694ff03 and did all the heavy lifting. The script plot-work.py plots the work function versus coverage. Unfortunately, the LOCPOT files are very large and I was unable to upload these.
 
 *GCMC stands for Grand Canonical Monte Carlo
+
 POSCAR-MC2-B2-Bulk-Supercell.vasp is the structure I used to cut the (0 1 0), (0 1 1), and (1 1 1) surface slabs. If you want to learn a fast and easy way to prepare surface slabs with VESTA please check out the PDF file "easy-surface-prep-with-vesta.pdf". The python script add_vacuum.py is a quick way to easily add a vacuum of your surface slab.
