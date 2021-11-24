@@ -30,4 +30,7 @@ order.
 *GCMC stands for Grand Canonical Monte Carlo
 
 POSCAR-MC2-B2-Bulk-Supercell.vasp is the structure I used to cut the (0 1 0), (0 1 1), and (1 1 1) surface slabs. A slab generation script was prepared during this work, generate-slab.py, and an example on how to use it is provided below.
+
 ---------------- Slab Generator ------------------
+
+
