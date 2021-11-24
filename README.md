@@ -1,5 +1,7 @@
 # Dolezal-Surface-Calcs
 
+** If you are here for the slab generator, that is generate-slab.py, scroll to the bottom for example
+
 Welcome! This directory provides the data files and post-processing scripts I developed for my surface calc paper. I have done my best to divide the scripts into an easy-to-follow
 order.
 
@@ -27,4 +29,5 @@ order.
 
 *GCMC stands for Grand Canonical Monte Carlo
 
-POSCAR-MC2-B2-Bulk-Supercell.vasp is the structure I used to cut the (0 1 0), (0 1 1), and (1 1 1) surface slabs. If you want to learn a fast and easy way to prepare surface slabs with VESTA please check out the PDF file "easy-surface-prep-with-vesta.pdf". The python script add_vacuum.py is a quick way to easily add a vacuum of your surface slab.
+POSCAR-MC2-B2-Bulk-Supercell.vasp is the structure I used to cut the (0 1 0), (0 1 1), and (1 1 1) surface slabs. A slab generation script was prepared during this work, generate-slab.py, and an example on how to use it is provided below.
+---------------- Slab Generator ------------------
