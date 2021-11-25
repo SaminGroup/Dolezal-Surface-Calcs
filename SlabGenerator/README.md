@@ -6,11 +6,9 @@ Make sure to pull both slab-generator.py and the structures/ directory. To initi
 
 "python3 slab-generator.py"
 
-
  |--------------------------- Welcome ---------------------------|
  | Here is a list of supported surfaces, crystal lattices, and   |
  | atom/unit cell                                                |
- 
  |---------------------------------------------------------------|
  | Lat.  | 1 0 0 | 0 1 0 | 0 0 1 | 1 1 0 | 1 0 1 | 0 1 1 | 1 1 1 |
  |---------------------------------------------------------------|
@@ -19,7 +17,6 @@ Make sure to pull both slab-generator.py and the structures/ directory. To initi
  | fcc   |   4   |   4   |   4   |   8   |   8   |   8   |   24  |
  | hcp   |   4   |   4   |   4   |   8   |   8   |   8   |   24  |
  |---------------------------------------------------------------|
- 
  ----------------------------- inputs ----------------------------
  *if bulk is not supercell provide: 1 1 1
  1. choose a face: 110
@@ -36,3 +33,4 @@ Make sure to pull both slab-generator.py and the structures/ directory. To initi
  5. bcc 110 surface slab of dims (3, 3, 2) completed
  ---------------------- procedure complete ------------------------
  ---------------------- please see POSCAR1 ------------------------
+ ![image](https://user-images.githubusercontent.com/47109396/143381504-ab0567db-581b-4ff6-9244-4a04b0773f1a.png)
