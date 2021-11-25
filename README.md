@@ -1,6 +1,6 @@
 # Dolezal-Surface-Calcs
 
-** If you are here for the slab generator, that is SlabGenerator/generate-slab.py
+** If you are here for the slab generator, that is in SaminGroup/Dolezal-SlabGenerator/
 
 Welcome! This directory provides the data files and post-processing scripts I developed for my surface calc paper. I have done my best to divide the scripts into an easy-to-follow
 order.
@@ -29,6 +29,6 @@ order.
 
 *GCMC stands for Grand Canonical Monte Carlo
 
-POSCAR-MC2-B2-Bulk-Supercell.vasp is the structure I used to cut the (0 1 0), (0 1 1), and (1 1 1) surface slabs
+POSCAR-MC2-B2-Bulk-Supercell.vasp is the structure I used to cut the (0 1 0), (0 1 1), and (1 1 1) surface slabs. Please see the SaminGroup/Dolezal-SlabGenerator/ directory for our tool to cut slabs from bulk structures!
 
 
