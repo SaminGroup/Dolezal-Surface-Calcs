@@ -8,5 +8,5 @@ Make sure to pull both slab-generator.py and the structures/ directory. To initi
 
  ![image](https://user-images.githubusercontent.com/47109396/143381504-ab0567db-581b-4ff6-9244-4a04b0773f1a.png)
 
-In this example I used a 4x4x4 BCC supercell as my bulk structure and cut out a 110 (3,3,2) slab
-#Happy Cutting!
+In this example I used a 4x4x4 BCC supercell as the bulk structure and cut out a (110) (3,3,2) slab
+## Happy Cutting!
