@@ -55,9 +55,9 @@ def delta_energy(E1):
 def update_poscar(r,coverage,move,i):
 
     atomcount = ["    6   10    4   18   26   {}\n",
-                 "   14   10    4   18  18   {}\n",
-                 "    6   18    4   18  18   {}\n",
-                 "    6   10    4   26  18   {}\n"]
+                 "   10   10    4   18  22   {}\n",
+                 "    6   14    4   18  22   {}\n",
+                 "    6   10    4   22  22   {}\n"]
 
     atom_count = atomcount[i]
     osites = np.loadtxt('o-atom-positions.txt')
